@@ -73,21 +73,47 @@ with tab1:
     funcion_activacion = cols[1].selectbox("Selecciona la función de activación:", options=options, key="funcion_activacion")
 
 
-    if st.button("Entrenar perceptron"):
-        st.write(f"Pesos iniciales: {pesos}, Sesgo inicial: {sesgo}")
-        notificacion = st.info("Entrenando perceptron...")
-
+    if st.button("🚀 Entrenar Perceptron", use_container_width=True, type="primary", key="button-AND"):
+        col1, col2 = st.columns(2)
+        with col1:
+            st.info(f"**Tasa de aprendizaje:** {tasa_aprendizaje}")
+        with col2:
+            st.info(f"**Funcion de activacion** {funcion_activacion}")
+    
         # Entrenamiento
-        pesos_entrenados, sesgo_entrenado = entrenar_perceptron(entradas, salidas_esperadas, pesos, sesgo, tasa_aprendizaje, options[funcion_activacion])
+        with st.spinner("⏳ Entrenando puerta OR..."):
+    
+            pesos_entrenados, sesgo_entrenado = entrenar_perceptron(entradas, salidas_esperadas, pesos, sesgo, tasa_aprendizaje, options[funcion_activacion])
 
-        if pesos_entrenados and sesgo_entrenado:
-            notificacion = st.success(f"Entrenamiento finalizado satisfactoriamente:\nPesos entrenados: {pesos_entrenados}.  Sesgo entrenado: {sesgo_entrenado}")
+            if pesos_entrenados and sesgo_entrenado:
+                st.subheader("Resultados de pesos y sesgo")
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.success(f"**Pesos Entrenados:** {[f'{p:.4f}' for p in pesos_entrenados]}")
+                with col2:
+                    st.success(f"**Sesgo Entrenado:** {sesgo_entrenado:.4f}")
 
-            st.subheader("Verificación del Y lógico entrenado")
-            perceptron = Neurona(pesos_entrenados, sesgo_entrenado, options[funcion_activacion])
-            for i in range(len(entradas)):
-                salida = perceptron.run(entradas[i])
-                st.write(f"Entrada: {entradas[i]} -> Salida: {salida} (Esperada: {salidas_esperadas[i]})")  
+                st.subheader("Verificación")
+                st.write("Si no obtienes los resultados esperados vuelve a entrenar hasta hayar los pesos y el sesgo que obtengan los resultados esperados.")
+                perceptron = Neurona(pesos_entrenados, sesgo_entrenado, options[funcion_activacion])
+
+                resultados = []
+                for i in range(len(entradas)):
+                    salida = perceptron.run(entradas[i])
+                    es_correcto = "✅" if abs(salida - salidas_esperadas[i]) < 0.5 else "❌"
+                    resultados.append({
+                        "Entrada": f"{entradas[i][0]} OR {entradas[i][1]}",
+                        "Salida": int(salida),
+                        "Salida Esperada": int(salidas_esperadas[i]),
+                        "Resultado": es_correcto
+                    })
+
+                st.dataframe(resultados, use_container_width=True)
+                st.markdown(
+                    "Una vez obtenidos los resultados esperados, ya puede probar su neurona con dichos pesos y sesgo en "
+                    "[Simulador neuronal](https://simulador-neuronal-vlc.streamlit.app/). "
+                    "Recuerde poner la función de activación correspondiente."
+                )
 
 with tab2:
     st.subheader("Datos de entrenamiento para Puerta Lógica AND (Y)")
