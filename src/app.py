@@ -22,8 +22,8 @@ def entrenar_perceptron(entradas, salidas_esperadas, pesos, sesgo, tasa_aprendiz
 ### Interfaz ###
 
 st.title('Entrenamiento neuronal')
-st.image("data/neurona.webp", width=400)
-#st.image("src/data/neurona.webp", width=400) # Img para despliegue en Streamlit.io
+#st.image("data/neurona.webp", width=400)
+st.image("src/data/neurona.webp", width=400) # Img para despliegue en Streamlit.io
 
 st.write("Esta es una aplicación educativa desarrollada con Streamlit que permite a los estudiantes comprender visualmente cómo funciona el entrenamiento de una neurona artificial mediante el algoritmo del perceptrón.")
 st.write("El objetivo es simular y demostrar el proceso de aprendizaje de una neurona, mostrando cómo se ajustan los pesos y sesgos a través de iteraciones sucesivas para clasificar correctamente datos de entrada.")
@@ -187,5 +187,6 @@ with tab3:
 
 
 st.write("© Cristina Vacas López - CPIFP Alan Turing")
+
 
 
