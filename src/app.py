@@ -1,5 +1,6 @@
 import streamlit as st
 import numpy as np
+import pandas as pd
 from Neurona import Neurona
 
 ### Funciones ###
@@ -22,7 +23,7 @@ def entrenar_perceptron(entradas, salidas_esperadas, pesos, sesgo, tasa_aprendiz
 ### Interfaz ###
 
 st.title('Entrenamiento neuronal')
-#st.image("data/neurona.webp", width=400)
+#st.image("data/neurona.webp", width=400) # Img para despliegue en local / docker
 st.image("src/data/neurona.webp", width=400) # Img para despliegue en Streamlit.io
 
 st.write("Esta es una aplicación educativa desarrollada con Streamlit que permite a los estudiantes comprender visualmente cómo funciona el entrenamiento de una neurona artificial mediante el algoritmo del perceptrón.")
@@ -137,7 +138,7 @@ with tab2:
 
         
 with tab3:
-    st.subheader("Datos de entrenamiento para Puerta Lógica OR (O)")
+    st.subheader("Ejemplo de entrenamiento para Puerta Lógica OR (O)")
 
     # Variables para el entrenamiento neuronal de un O Logico
     entradas = [[0,0], [0,1], [1,0], [1,1]]
@@ -148,13 +149,21 @@ with tab3:
     funcion_activacion = 'binary_step'
 
     # Tabla de  datos
-    ##################
+    df_cols = {f"Entrada {i+1}": [row[i] for row in entradas] for i in range(int(n_entradas))}
+    df_cols["Salida Esperada"] = salidas_esperadas
+    df_entr = pd.DataFrame(df_cols)
+    st.subheader("Tabla de datos de entrenamiento")
+    st.dataframe(df_entr, use_container_width=True)
+
 
     col1, col2 = st.columns(2)
     with col1:
         st.info(f"**Pesos Iniciales:** {[f'{p:.4f}' for p in pesos]}")
+        st.info(f"**Tasa de aprendizaje:** {tasa_aprendizaje}")
     with col2:
         st.info(f"**Sesgo Inicial:** {sesgo:.4f}")
+        st.info(f"**Funcion de activacion:** {funcion_activacion}")
+
     
 
     if st.button("🚀 Entrenar OR", use_container_width=True, type="primary", key="button-OR"):
