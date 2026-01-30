@@ -73,7 +73,7 @@ with tab1:
     funcion_activacion = cols[1].selectbox("Selecciona la función de activación:", options=options, key="funcion_activacion")
 
 
-    if st.button("🚀 Entrenar Perceptron", use_container_width=True, type="primary", key="button-AND"):
+    if st.button("🚀 Entrenar Perceptron", use_container_width=True, type="primary", key="button-perceptron"):
         col1, col2 = st.columns(2)
         with col1:
             st.info(f"**Tasa de aprendizaje:** {tasa_aprendizaje}")
