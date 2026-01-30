@@ -150,7 +150,11 @@ with tab2:
                 })
             
             st.dataframe(resultados, use_container_width=True)
-            st.write(f"Una vez obtenido los resultados esperados ya puede probar su neurona con dichos pesos y sesgo en el {st.page_link("https://simulador-neuronal-vlc.streamlit.app/", label="Simulador neuronal")}, recuerde poner la funcion de activacion correspondiente.")
+            st.markdown(
+                "Una vez obtenidos los resultados esperados, ya puede probar su neurona con dichos pesos y sesgo en "
+                "[Simulador neuronal](https://simulador-neuronal-vlc.streamlit.app/). "
+                "Recuerde poner la función de activación correspondiente."
+            )
 
         
 with tab3:
@@ -215,8 +219,11 @@ with tab3:
                 })
             
             st.dataframe(resultados, use_container_width=True)
-            st.write(f"Una vez obtenido los resultados esperados ya puede probar su neurona con dichos pesos y sesgo en el {st.page_link("https://simulador-neuronal-vlc.streamlit.app/", label="Simulador neuronal")}, recuerde poner la funcion de activacion correspondiente.")
-
+            st.markdown(
+                "Una vez obtenidos los resultados esperados, ya puede probar su neurona con dichos pesos y sesgo en "
+                "[Simulador neuronal](https://simulador-neuronal-vlc.streamlit.app/). "
+                "Recuerde poner la función de activación correspondiente."
+            )
 
 st.write("© Cristina Vacas López - CPIFP Alan Turing")
 
