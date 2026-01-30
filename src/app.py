@@ -143,8 +143,8 @@ with tab3:
     # Variables para el entrenamiento neuronal de un O Logico
     entradas = [[0,0], [0,1], [1,0], [1,1]]
     salidas_esperadas = [0, 1, 1, 1]
-    pesos = [np.random.random(), np.random.random()]
-    sesgo = np.random.random()
+    pesos_iniciales = [np.random.random(), np.random.random()]
+    sesgo_inicial = np.random.random()
     tasa_aprendizaje = 0.2
     funcion_activacion = 'binary_step'
 
@@ -158,10 +158,10 @@ with tab3:
 
     col1, col2 = st.columns(2)
     with col1:
-        st.info(f"**Pesos Iniciales:** {[f'{p:.4f}' for p in pesos]}")
+        st.info(f"**Pesos Iniciales:** {[f'{p:.4f}' for p in pesos_iniciales]}")
         st.info(f"**Tasa de aprendizaje:** {tasa_aprendizaje}")
     with col2:
-        st.info(f"**Sesgo Inicial:** {sesgo:.4f}")
+        st.info(f"**Sesgo Inicial:** {sesgo_inicial:.4f}")
         st.info(f"**Funcion de activacion:** {funcion_activacion}")
 
     
