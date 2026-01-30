@@ -116,7 +116,7 @@ with tab1:
                 )
 
 with tab2:
-    st.subheader("Datos de entrenamiento para Puerta Lógica AND (Y)")
+    st.subheader("Ejemplo de entrenamiento para Puerta Lógica AND (Y)")
 
     # Variables para el entrenamiento neuronal de un Y Logico
     entradas = [[0,0], [0,1], [1,0], [1,1]]
