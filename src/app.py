@@ -101,16 +101,28 @@ with tab2:
     funcion_activacion = 'binary_step'
 
     # Tabla de  datos
-    ##################
+    df_cols = {f"Entrada {i+1}": [row[i] for row in entradas] for i in range(int(n_entradas))}
+    df_cols["Salida Esperada"] = salidas_esperadas
+    df_entr = pd.DataFrame(df_cols)
+    st.subheader("Tabla de datos de entrenamiento")
+    st.dataframe(df_entr, use_container_width=True)
 
     col1, col2 = st.columns(2)
     with col1:
-        st.info(f"**Pesos Iniciales:** {[f'{p:.4f}' for p in pesos]}")
+        st.info(f"**Tasa de aprendizaje:** {tasa_aprendizaje}")
     with col2:
-        st.info(f"**Sesgo Inicial:** {sesgo:.4f}")
+        st.info(f"**Funcion de activacion** {funcion_activacion}")
     
 
     if st.button("🚀 Entrenar OR", use_container_width=True, type="primary", key="button-AND"):
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.info(f"**Pesos Iniciales:** {[f'{p:.4f}' for p in pesos]}")
+        with col2:
+            st.info(f"**Sesgo Inicial:** {sesgo:.4f}")
+
+
         with st.spinner("⏳ Entrenando puerta OR..."):
             pesos_entrenados, sesgo_entrenado = entrenar_perceptron(entradas, salidas_esperadas, pesos, sesgo, tasa_aprendizaje, funcion_activacion)
             
@@ -123,6 +135,7 @@ with tab2:
 
             # Verificacion del perceptron entrenado
             st.subheader("Verificación")
+            st.write("Si no obtienes los resultados esperados vuelve a entrenar hasta hayar los pesos y el sesgo que obtengan los resultados esperados.")
             neuron_or = Neurona(pesos_entrenados, sesgo_entrenado, 'binary_step')
             
             resultados = []
@@ -137,6 +150,7 @@ with tab2:
                 })
             
             st.dataframe(resultados, use_container_width=True)
+            st.write(f"Una vez obtenido los resultados esperados ya puede probar su neurona con dichos pesos y sesgo en el {st.page_link("https://simulador-neuronal-vlc.streamlit.app/", label="Simulador neuronal")}, recuerde poner la funcion de activacion correspondiente.")
 
         
 with tab3:
@@ -157,18 +171,21 @@ with tab3:
     st.subheader("Tabla de datos de entrenamiento")
     st.dataframe(df_entr, use_container_width=True)
 
-
     col1, col2 = st.columns(2)
     with col1:
-        st.info(f"**Pesos Iniciales:** {[f'{p:.4f}' for p in pesos]}")
         st.info(f"**Tasa de aprendizaje:** {tasa_aprendizaje}")
     with col2:
-        st.info(f"**Sesgo Inicial:** {sesgo:.4f}")
-        st.info(f"**Funcion de activacion:** {funcion_activacion}")
-
+        st.info(f"**Funcion de activacion** {funcion_activacion}")
     
 
     if st.button("🚀 Entrenar OR", use_container_width=True, type="primary", key="button-OR"):
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.info(f"**Pesos Iniciales:** {[f'{p:.4f}' for p in pesos]}")
+        with col2:
+            st.info(f"**Sesgo Inicial:** {sesgo:.4f}")
+
         with st.spinner("⏳ Entrenando puerta OR..."):
             pesos_entrenados, sesgo_entrenado = entrenar_perceptron(entradas, salidas_esperadas, pesos, sesgo, tasa_aprendizaje, funcion_activacion)
             
@@ -180,7 +197,10 @@ with tab3:
                 st.success(f"**Sesgo Entrenado:** {sesgo_entrenado:.4f}")
 
             # Verificacion del perceptron entrenado
+
             st.subheader("Verificación")
+            st.write("Si no obtienes los resultados esperados vuelve a entrenar hasta hayar los pesos y el sesgo que obtengan los resultados esperados.")
+
             neuron_or = Neurona(pesos_entrenados, sesgo_entrenado, 'binary_step')
             
             resultados = []
@@ -195,6 +215,7 @@ with tab3:
                 })
             
             st.dataframe(resultados, use_container_width=True)
+            st.write(f"Una vez obtenido los resultados esperados ya puede probar su neurona con dichos pesos y sesgo en el {st.page_link("https://simulador-neuronal-vlc.streamlit.app/", label="Simulador neuronal")}, recuerde poner la funcion de activacion correspondiente.")
 
 
 st.write("© Cristina Vacas López - CPIFP Alan Turing")
