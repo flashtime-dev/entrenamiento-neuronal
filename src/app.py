@@ -6,8 +6,8 @@ from Neurona import Neurona
 ### Funciones ###
 
 def entrenar_perceptron(entradas, salidas_esperadas, pesos_inicales, sesgo_inicial, tasa_aprendizaje, funcion_activacion, max_iter=1000):
-    pesos = pesos
-    sesgo = sesgo
+    pesos = pesos_inicales
+    sesgo = sesgo_inicial
     for n in range(len(entradas)):
         for _ in range(max_iter):
             salida = Neurona(pesos, sesgo, funcion_activacion).run(entradas[n])
