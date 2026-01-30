@@ -76,9 +76,9 @@ with tab1:
     if st.button("🚀 Entrenar Perceptron", use_container_width=True, type="primary", key="button-perceptron"):
         col1, col2 = st.columns(2)
         with col1:
-            st.info(f"**Tasa de aprendizaje:** {tasa_aprendizaje}")
+            st.info(f"**Pesos iniciales:** {pesos}")
         with col2:
-            st.info(f"**Funcion de activacion** {funcion_activacion}")
+            st.info(f"**Sesgo inicial** {sesgo}")
     
         # Entrenamiento
         with st.spinner("⏳ Entrenando puerta OR..."):
